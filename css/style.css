@@ -534,3 +534,11 @@ p { margin: 0 0 1em; }
   .location { grid-template-columns: 1fr; gap: 36px; }
   .location-map { min-height: 380px; }
 }
+
+/* Phone booking card (contact page) */
+.booking-card { padding: 44px 40px; border-radius: 20px; }
+.booking-card h2 { color: #fff; font-size: 32px; }
+.booking-card h2 em { color: #ff9ea3; }
+.booking-card .eyebrow { color: #ff9ea3; }
+.booking-card .btn { width: 100%; margin-top: 12px; font-size: 16px; padding: 16px 24px; }
+@media (max-width: 640px) { .booking-card { padding: 32px 22px; } }

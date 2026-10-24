@@ -32,7 +32,7 @@ addReveal('.split > .reveal:last-child', 'right');
 addReveal('.cards', null, 0.12);
 addReveal('.info-grid', null, 0.12);
 addReveal('.contact-list', 'left', 0.08);
-addReveal('.form', 'right');
+addReveal('.booking-card', 'right');
 addReveal('.cta-box', 'zoom');
 addReveal('.map', 'zoom');
 addReveal('.location-info', 'left');
@@ -164,27 +164,6 @@ if (canHover && !reduceMotion) {
       badge.style.translate = `${x * -18}px ${y * -14}px`;
     });
   }
-}
-
-// Appointment form -> opens the visitor's email client with a prefilled message
-const form = document.getElementById('booking-form');
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const d = new FormData(form);
-    const subject = `Αίτημα ραντεβού – ${d.get('name')}`;
-    const body = [
-      `Ονοματεπώνυμο: ${d.get('name')}`,
-      `Τηλέφωνο: ${d.get('phone')}`,
-      `Email: ${d.get('email') || '-'}`,
-      `Εξέταση: ${d.get('service')}`,
-      `Προτιμώμενη ημέρα: ${d.get('day')}`,
-      '',
-      d.get('message') || ''
-    ].join('\n');
-    window.location.href =
-      `mailto:doulamis.vasilios@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  });
 }
 
 // Footer year
