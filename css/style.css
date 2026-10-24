@@ -365,3 +365,6 @@ p { margin: 0 0 1em; }
   .logo-text span { font-size: 10px; }
   .hero-stats { gap: 24px; }
 }
+.footer-bottom .credit { margin-left: auto; color: #8796ad; }
+.footer-bottom .credit strong { color: #fff; font-weight: 600; }
+.footer-bottom .credit:hover strong { color: var(--red); }
