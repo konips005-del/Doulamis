@@ -542,3 +542,35 @@ p { margin: 0 0 1em; }
 .booking-card .eyebrow { color: #ff9ea3; }
 .booking-card .btn { width: 100%; margin-top: 12px; font-size: 16px; padding: 16px 24px; }
 @media (max-width: 640px) { .booking-card { padding: 32px 22px; } }
+
+/* ===== Real photos ===== */
+.photo img { object-position: center 30%; }
+
+/* ===== Gallery (Το ιατρείο) ===== */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 16px; }
+.g-item { position: relative; display: block; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow); background: var(--sand); }
+.g-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--ease); }
+.g-main { grid-column: span 2; grid-row: span 2; }
+.g-cap {
+  position: absolute; left: 14px; bottom: 14px; background: rgba(15,35,64,.82); color: #fff;
+  font-size: 13px; letter-spacing: .04em; padding: 6px 12px; border-radius: 999px; backdrop-filter: blur(4px);
+}
+@media (hover: hover) { .g-item:hover img { transform: scale(1.05); } }
+@media (max-width: 900px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; gap: 12px; }
+}
+@media (max-width: 520px) {
+  .gallery { grid-auto-rows: 130px; }
+  .g-main { grid-row: span 2; }
+}
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(8,18,34,.92); display: none; align-items: center; justify-content: center; padding: 56px 16px; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: min(1200px, 100%); max-height: 100%; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.lightbox button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 46px; height: 46px; border-radius: 50%; font-size: 24px; line-height: 1; cursor: pointer; }
+.lightbox button:hover { background: rgba(255,255,255,.25); }
+.lightbox .lb-close { top: 14px; right: 14px; }
+.lightbox .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-cap { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.8); font-size: 14px; }

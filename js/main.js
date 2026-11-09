@@ -38,6 +38,7 @@ addReveal('.map', 'zoom');
 addReveal('.location-info', 'left');
 addReveal('.location-map', 'zoom');
 addReveal('.map-head');
+addReveal('.gallery', null, 0.08);
 addReveal('.prose > h2, .prose > p, .prose > ul, .faq details');
 addReveal('.aside', 'right', 0.12);
 addReveal('.timeline', null, 0.08);
@@ -168,3 +169,42 @@ if (canHover && !reduceMotion) {
 
 // Footer year
 document.querySelectorAll('[data-year]').forEach(el => (el.textContent = new Date().getFullYear()));
+
+// Gallery lightbox
+const galleryLinks = [...document.querySelectorAll('.gallery .g-item')];
+if (galleryLinks.length) {
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Φωτογραφίες ιατρείου');
+  lb.innerHTML = '<img alt=""><span class="lb-cap"></span>' +
+    '<button class="lb-prev" aria-label="Προηγούμενη">‹</button>' +
+    '<button class="lb-next" aria-label="Επόμενη">›</button>' +
+    '<button class="lb-close" aria-label="Κλείσιμο">×</button>';
+  document.body.appendChild(lb);
+  const lbImg = lb.querySelector('img'), lbCap = lb.querySelector('.lb-cap');
+  let idx = 0, lastFocus = null;
+  const show = i => {
+    idx = (i + galleryLinks.length) % galleryLinks.length;
+    const a = galleryLinks[idx], im = a.querySelector('img');
+    lbImg.src = a.href; lbImg.alt = im.alt;
+    lbCap.textContent = `${a.querySelector('.g-cap')?.textContent || ''} · ${idx + 1}/${galleryLinks.length}`;
+  };
+  const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; lastFocus?.focus(); };
+  galleryLinks.forEach((a, i) => a.addEventListener('click', e => {
+    e.preventDefault(); lastFocus = a; show(i);
+    lb.classList.add('open'); document.body.style.overflow = 'hidden';
+    lb.querySelector('.lb-close').focus();
+  }));
+  lb.querySelector('.lb-prev').addEventListener('click', () => show(idx - 1));
+  lb.querySelector('.lb-next').addEventListener('click', () => show(idx + 1));
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+}
