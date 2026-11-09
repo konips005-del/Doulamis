@@ -574,3 +574,7 @@ p { margin: 0 0 1em; }
 .lightbox .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
 .lightbox .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
 .lightbox .lb-cap { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.8); font-size: 14px; }
+
+/* Footer: detailed opening hours */
+.f-hours strong { display: block; color: #fff; font-weight: 500; margin-bottom: 4px; }
+.f-hours span { display: block; }
